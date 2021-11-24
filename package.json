@@ -1,19 +1,13 @@
 {
-  "name": "nodedirectuploader",
-  "version": "1.0.0",
-  "description": "comp 7881",
-  "main": "index.js",
+  "name": "NodeDirectUploader",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ryandraper/NodeDirectUploader.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ryandraper/NodeDirectUploader/issues"
-  },
-  "homepage": "https://github.com/ryandraper/NodeDirectUploader#readme"
+  "dependencies": {
+    "aws-sdk": "2.x",
+    "ejs": "2.x",
+    "express": "4.x"
+  }
 }
