@@ -79,13 +79,16 @@ app.get('/sign-s3', (req, res) => {
  */
 app.post('/save-details', (req, res) => {
   console.log('request: ');
-  console.log(req.body.username);
-  console.log(req.body.fullname);
-
+  console.log(typeof(res));
+  console.log(typeof(req));
+  // console.log(req.body.username);
+  // console.log(req.body.fullname);
+  let reqdata = JSON.stringify(req);
+  let resdata = JSON.stringify(res);
   // console.log('%o',req);
   // console.log('foobar end request');
 
   // console.log('%o',res);
-  res.end('successfully submitted');
+  res.end(reqdata);
   // TODO: Read POSTed form data and do something useful
 });
