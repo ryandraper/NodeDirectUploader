@@ -81,6 +81,6 @@ app.post('/save-details', (req, res) => {
   console.log('foobar');
   // console.log('%o',req);
   // console.log('%o',res);
-
+  res.end('successful post, huzzah');
   // TODO: Read POSTed form data and do something useful
 });
