@@ -78,11 +78,14 @@ app.get('/sign-s3', (req, res) => {
  * a way that suits your application.
  */
 app.post('/save-details', (req, res) => {
-  // console.log('foobar start request');
+  console.log('request: ');
+  console.log(req.body.username);
+  console.log(req.body.fullname);
+
   // console.log('%o',req);
   // console.log('foobar end request');
 
   // console.log('%o',res);
-  res.end(req);
+  res.end('successfully submitted');
   // TODO: Read POSTed form data and do something useful
 });
