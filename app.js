@@ -83,8 +83,8 @@ app.post('/save-details', (req, res) => {
   console.log(typeof(req));
   // console.log(req.body.username);
   // console.log(req.body.fullname);
-  let reqdata = JSON.stringify(req);
-  let resdata = JSON.stringify(res);
+  let reqdata = simpleStringify(req);
+  let resdata = simpleStringify(res);
   // console.log('%o',req);
   // console.log('foobar end request');
 
@@ -92,3 +92,20 @@ app.post('/save-details', (req, res) => {
   res.end(reqdata);
   // TODO: Read POSTed form data and do something useful
 });
+
+function simpleStringify (object){
+  var simpleObject = {};
+  for (var prop in object ){
+      if (!object.hasOwnProperty(prop)){
+          continue;
+      }
+      if (typeof(object[prop]) == 'object'){
+          continue;
+      }
+      if (typeof(object[prop]) == 'function'){
+          continue;
+      }
+      simpleObject[prop] = object[prop];
+  }
+  return JSON.stringify(simpleObject); // returns cleaned up JSON
+};
