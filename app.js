@@ -89,7 +89,7 @@ app.post('/save-details', (req, res) => {
   // console.log('foobar end request');
 
   // console.log('%o',res);
-  res.end(reqdata);
+  res.end(resdata);
   // TODO: Read POSTed form data and do something useful
 });
 
