@@ -94,20 +94,22 @@ app.get('/sign-s3', (req, res) => {
  * a way that suits your application.
  */
 app.post('/save-details', (req, res) => {
-  console.log('db url: ' + process.env.DATABASE_URL);
-  console.log('request: ');
 
-  console.log(req.body.username);
-  console.log(req.body.fullname);
+  insertData(req,res);
+  //console.log('db url: ' + process.env.DATABASE_URL);
+  // console.log('request: ');
 
-  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
-  console.log(insertQuery);
+  // console.log(req.body.username);
+  // console.log(req.body.fullname);
+
+  // let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
+  // console.log(insertQuery);
   
-  await client.connect();
+  // await client.connect();
 
   //client.connect(client.connectionString, function(err, client, done){});
 
-  const queryResult = await client.query(insertQuery); //, (err, res) => {
+  //const queryResult = await client.query(insertQuery); //, (err, res) => {
   //   console.log('database res');
   //   console.log('%o',res);
   //   if (err) throw err;
@@ -118,11 +120,30 @@ app.post('/save-details', (req, res) => {
   //   res.end('done');
   // });
 
-  console.log(queryResult);
-  client.end();
-  res.end('done');
+  // console.log(queryResult);
+  // client.end();
+  // res.end('done');
 
 
   
   // TODO: Read POSTed form data and do something useful
 });
+
+async function insertData(req,res){
+
+  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
+  console.log(insertQuery);
+
+  // console.log('request: ');
+
+  // console.log(req.body.username);
+  // console.log(req.body.fullname);
+
+  await client.connect();
+
+  const queryResult = await client.query(insertQuery);
+  console.log(queryResult);
+  client.end();
+  res.end('done');
+
+}
