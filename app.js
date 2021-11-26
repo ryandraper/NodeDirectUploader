@@ -100,9 +100,11 @@ app.post('/save-details', (req, res) => {
   console.log(req.body.username);
   console.log(req.body.fullname);
 
+  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
+  console.log(insertQuery);
   client.connect();
 
-  client.query('SELECT username FROM users;', (err, res) => {
+  client.query(insertQuery, (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
