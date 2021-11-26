@@ -79,6 +79,7 @@ app.get('/sign-s3', (req, res) => {
  */
 app.post('/save-details', (req, res) => {
   console.log('request: ');
+  console.log(req.username);
   console.log(typeof(res));
   console.log(typeof(req));
   // console.log(req.body.username);
