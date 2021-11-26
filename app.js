@@ -95,7 +95,7 @@ app.get('/sign-s3', (req, res) => {
  */
 app.post('/save-details', (req, res) => {
 
-  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
+  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '\'' + req.body.username + '\', \'' + req.body.fullname + '\');';
   console.log(insertQuery);
 
   const { Client } = require('pg');
