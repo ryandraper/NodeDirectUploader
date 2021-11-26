@@ -104,7 +104,7 @@ app.post('/save-details', (req, res) => {
   client.query(insertQuery, (err, result) => {
     console.log(err ? err.stack : result.rows[0].message); // Hello World!
     client.end();
-    result.end('done');
+    res.end('done');
   });
 
   //insertData(req,res);
