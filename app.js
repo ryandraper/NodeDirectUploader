@@ -99,7 +99,12 @@ app.post('/save-details', (req, res) => {
   console.log(insertQuery);
 
   const { Client } = require('pg');
-  const client = new Client();
+  const client = new Client({
+      connectionString: process.env.DATABASE_URL,  
+      ssl: {
+        rejectUnauthorized: false
+      }
+  });
   client.connect();
   client.query(insertQuery, (err, result) => {
     console.log(err ? err.stack : result.rows[0].message); // Hello World!
