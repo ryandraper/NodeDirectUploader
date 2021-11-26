@@ -14,6 +14,16 @@
 const express = require('express');
 const aws = require('aws-sdk');
 
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+
 /*
  * Set-up and run the Express app.
  */
@@ -85,34 +95,21 @@ app.get('/sign-s3', (req, res) => {
  */
 app.post('/save-details', (req, res) => {
   console.log('request: ');
-  console.log(req.username);
-  console.log(typeof(res));
-  console.log(typeof(req));
+
   console.log(req.body.username);
   console.log(req.body.fullname);
-  let reqdata = simpleStringify(req);
-  let resdata = simpleStringify(res);
-  // console.log('%o',req);
-  // console.log('foobar end request');
 
-  // console.log('%o',res);
-  res.end(resdata);
+  client.connect();
+
+  client.query('SELECT * FROM users;', (err, res) => {
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    client.end();
+  });
+
+
+  res.end('done');
   // TODO: Read POSTed form data and do something useful
 });
-
-function simpleStringify (object){
-  var simpleObject = {};
-  for (var prop in object ){
-      if (!object.hasOwnProperty(prop)){
-          continue;
-      }
-      if (typeof(object[prop]) == 'object'){
-          continue;
-      }
-      if (typeof(object[prop]) == 'function'){
-          continue;
-      }
-      simpleObject[prop] = object[prop];
-  }
-  return JSON.stringify(simpleObject); // returns cleaned up JSON
-};
