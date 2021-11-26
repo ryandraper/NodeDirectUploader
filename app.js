@@ -14,15 +14,6 @@
 const express = require('express');
 const aws = require('aws-sdk');
 
-//const { Client } = require('pg');
-
-// const client = new Client({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
-
 
 /*
  * Set-up and run the Express app.
@@ -112,55 +103,5 @@ app.post('/save-details', (req, res) => {
     res.end('done');
   });
 
-  //insertData(req,res);
-  //console.log('db url: ' + process.env.DATABASE_URL);
-  // console.log('request: ');
-
-  // console.log(req.body.username);
-  // console.log(req.body.fullname);
-
-  // let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
-  // console.log(insertQuery);
-  
-  // await client.connect();
-
-  //client.connect(client.connectionString, function(err, client, done){});
-
-  //const queryResult = await client.query(insertQuery); //, (err, res) => {
-  //   console.log('database res');
-  //   console.log('%o',res);
-  //   if (err) throw err;
-  //   for (let row of res.rows) {
-  //     console.log(JSON.stringify(row));
-  //   }
-  //   client.end();
-  //   res.end('done');
-  // });
-
-  // console.log(queryResult);
-  // client.end();
-  // res.end('done');
-
-
-  
-  // TODO: Read POSTed form data and do something useful
 });
 
-// async function insertData(req,res){
-
-//   let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
-//   console.log(insertQuery);
-
-//   // console.log('request: ');
-
-//   // console.log(req.body.username);
-//   // console.log(req.body.fullname);
-
-//   await client.connect();
-
-//   const queryResult = await client.query(insertQuery);
-//   console.log(queryResult);
-//   client.end();
-//   res.end('done');
-
-// }
