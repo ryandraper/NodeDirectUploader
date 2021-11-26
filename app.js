@@ -24,6 +24,12 @@ app.engine('html', require('ejs').renderFile);
 app.get('/', (req, res) => res.render('index.ejs'))
 app.listen(process.env.PORT || 3000);
 
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded());
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 /*
  * Configure the AWS region of the target bucket.
  * Remember to change this to the relevant region.
@@ -82,8 +88,8 @@ app.post('/save-details', (req, res) => {
   console.log(req.username);
   console.log(typeof(res));
   console.log(typeof(req));
-  // console.log(req.body.username);
-  // console.log(req.body.fullname);
+  console.log(req.body.username);
+  console.log(req.body.fullname);
   let reqdata = simpleStringify(req);
   let resdata = simpleStringify(res);
   // console.log('%o',req);
