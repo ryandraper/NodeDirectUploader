@@ -102,7 +102,10 @@ app.post('/save-details', (req, res) => {
 
   let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
   console.log(insertQuery);
+  
   client.connect();
+
+  //client.connect(client.connectionString, function(err, client, done){});
 
   client.query(insertQuery, (err, res) => {
     console.log('database res');
@@ -112,9 +115,10 @@ app.post('/save-details', (req, res) => {
       console.log(JSON.stringify(row));
     }
     client.end();
+    res.end('done');
   });
 
 
-  res.end('done');
+  
   // TODO: Read POSTed form data and do something useful
 });
