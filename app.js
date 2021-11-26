@@ -106,7 +106,7 @@ app.post('/save-details', (req, res) => {
 
   client.query(insertQuery, (err, res) => {
     console.log('database res');
-    console.log('%o',res):
+    console.log('%o',res);
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
