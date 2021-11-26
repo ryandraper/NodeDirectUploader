@@ -14,14 +14,14 @@
 const express = require('express');
 const aws = require('aws-sdk');
 
-const { Client } = require('pg');
+//const { Client } = require('pg');
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
 
 
 /*
@@ -95,7 +95,19 @@ app.get('/sign-s3', (req, res) => {
  */
 app.post('/save-details', (req, res) => {
 
-  insertData(req,res);
+  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
+  console.log(insertQuery);
+
+  const { Client } = require('pg');
+  const client = new Client();
+  client.connect();
+  client.query(insertQuery, (err, result) => {
+    console.log(err ? err.stack : result.rows[0].message); // Hello World!
+    client.end();
+    result.end('done');
+  });
+
+  //insertData(req,res);
   //console.log('db url: ' + process.env.DATABASE_URL);
   // console.log('request: ');
 
@@ -129,21 +141,21 @@ app.post('/save-details', (req, res) => {
   // TODO: Read POSTed form data and do something useful
 });
 
-async function insertData(req,res){
+// async function insertData(req,res){
 
-  let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
-  console.log(insertQuery);
+//   let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
+//   console.log(insertQuery);
 
-  // console.log('request: ');
+//   // console.log('request: ');
 
-  // console.log(req.body.username);
-  // console.log(req.body.fullname);
+//   // console.log(req.body.username);
+//   // console.log(req.body.fullname);
 
-  await client.connect();
+//   await client.connect();
 
-  const queryResult = await client.query(insertQuery);
-  console.log(queryResult);
-  client.end();
-  res.end('done');
+//   const queryResult = await client.query(insertQuery);
+//   console.log(queryResult);
+//   client.end();
+//   res.end('done');
 
-}
+// }
