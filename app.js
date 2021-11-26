@@ -103,20 +103,24 @@ app.post('/save-details', (req, res) => {
   let insertQuery = 'INSERT INTO users( username, fullname) VALUES(' + '"' + req.body.username + '", "' + req.body.fullname + '");';
   console.log(insertQuery);
   
-  client.connect();
+  await client.connect();
 
   //client.connect(client.connectionString, function(err, client, done){});
 
-  client.query(insertQuery, (err, res) => {
-    console.log('database res');
-    console.log('%o',res);
-    if (err) throw err;
-    for (let row of res.rows) {
-      console.log(JSON.stringify(row));
-    }
-    client.end();
-    res.end('done');
-  });
+  const queryResult = await client.query(insertQuery); //, (err, res) => {
+  //   console.log('database res');
+  //   console.log('%o',res);
+  //   if (err) throw err;
+  //   for (let row of res.rows) {
+  //     console.log(JSON.stringify(row));
+  //   }
+  //   client.end();
+  //   res.end('done');
+  // });
+
+  console.log(queryResult);
+  client.end();
+  res.end('done');
 
 
   
