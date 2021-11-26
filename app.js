@@ -94,6 +94,7 @@ app.get('/sign-s3', (req, res) => {
  * a way that suits your application.
  */
 app.post('/save-details', (req, res) => {
+  console.log('db url: ' + process.env.DATABASE_URL);
   console.log('request: ');
 
   console.log(req.body.username);
@@ -101,7 +102,7 @@ app.post('/save-details', (req, res) => {
 
   client.connect();
 
-  client.query('SELECT * FROM users;', (err, res) => {
+  client.query('SELECT username FROM users;', (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
