@@ -1,4 +1,3 @@
-const { app } = require('./');
 
 describe('app test', () => {
 
