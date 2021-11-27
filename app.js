@@ -22,7 +22,7 @@ const app = express();
 app.set('views', './views');
 app.use(express.static('./public'));
 app.engine('html', require('ejs').renderFile);
-app.get('/', (req, res) => res.render('index.ejs'))
+app.get('/', (req, res) => res.render('account.html'))
 app.listen(process.env.PORT || 3000);
 
 // Parse URL-encoded bodies (as sent by HTML forms)
